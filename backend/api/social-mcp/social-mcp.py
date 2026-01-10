@@ -1,3 +1,9 @@
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from openai import OpenAI
+
+
 from dotenv import load_dotenv
 load_dotenv()
 from mcp.server.fastmcp import FastMCP
@@ -11,6 +17,14 @@ from fetchers.youtube import fetch_youtube_comments
 logging.getLogger("mcp").setLevel(logging.WARNING)
 
 mcp = FastMCP("social-mcp")
+
+# CORS so the frontend can talk to backend
+mcp.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 # ---------------- PROMPT ----------------
 @mcp.prompt()
