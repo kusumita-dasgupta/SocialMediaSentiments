@@ -8,6 +8,7 @@ import asyncio
 from dotenv import load_dotenv
 load_dotenv()
 
+
 async def main():
     async with MCPServerStdio(
         name="Social Media MCP Server",
